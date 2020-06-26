@@ -1,7 +1,4 @@
-NAME: Gawun Kim
-EMAIL: gawun92@g.ucla.edu
-ID: 305186572
-   
+
 Makefile:
 	Makefile - compile / checking by smoke test cases / dist / clean
 lab4b.c: Source code. 
