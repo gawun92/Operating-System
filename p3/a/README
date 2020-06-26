@@ -1,0 +1,13 @@
+NAME: Gawun Kim
+EMAIL: gawun92@g.ucla.edu
+ID: 305186572
+
+
+lab3a.c  : source code
+Makefile : compile/dist/clean
+
+reference:
+http://man7.org/linux/man-pages/man2/pread.2.html
+https://www.programiz.com/c-programming/library-function/math.h/ceil
+https://www.tutorialspoint.com/c_standard_library/c_function_ceil.htm
+

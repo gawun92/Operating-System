@@ -1,0 +1,25 @@
+NAME: GAWUN KIM
+EMAIL: gawun92@g.ucla.edu
+ID: 305186572
+
+S/N : BBG W18 031 169
+MAC : 2CF 7F1 067 890
+
+
+my_beaglebone.jpg : 
+a picture of myself with my beaglebone(assembled).
+
+connected.png : 
+I gave the device a name as my student ID. and by connmanctl, I joined the wifi-related page and connecting wifi with the following  commands: "enable wifi", "scan wifi", "services" ,"connect wifi" I connected the device to wifi. and by "ifconfig", it shows wifi configured.
+
+copy.png : 
+From my local server by scp, I copied the file to the beaglebone server.
+
+build_run.png : 
+I joined the beaglebone server, compiled the copied file, and run it (it shows "hello world")
+
+git.png : I installed git in the beaglebone server by "sudo apt-get install git" and I cloned my git repository into the server.
+
+Makefile : build the tarball
+
+README : description of each contained file.

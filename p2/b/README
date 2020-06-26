@@ -1,0 +1,91 @@
+NAME: Gawun Kim
+EMAIL: gawun92@g.ucla.edu
+ID: 305186572
+
+
+QUESTIONS & ANSWERS:
+
+QUESTION 2.3.1 - CPU time in the basic list implementation:
+Where do you believe most of the CPU time is spent in the 1 and 2-thread list tests ?
+Why do you believe these to be the most expensive parts of the code?
+Where do you believe most of the CPU time is being spent in the high-thread spin-lock tests?
+Where do you believe most of the CPU time is being spent in the high-thread mutex tests?
+
+	> I think the most of the time is spent in list operations (functions in SortedList.c and SortedList.h). 
+	The number of threads are really samll and the time to be spent on lock would be significantly small.
+	> This is because it is dealing with manipulating the list (delete and insert). In other words, 
+	it is related to pointer and re-define the list so that its cost is more expensive. 
+	However, in the case of lock, its cost is relatively cheaper because the number of threads is just 1 or 2 and it does not significantly affect the CPU time.
+	> In spin lock, it would keep running process until satisfying the condition in while loop. 
+	Which means that until meeting the condition, the lock will keep running(waiting). 
+	When dealing with low-threads, it would not be problematic because the cost of spin would be significantly small.
+	However, in the high-threads spin, it would take a lot of time to wait in spin lock to wait for other threads.
+	> As the reading material mentioned, using sleep and wake for the lock is more beneficial and efficient compared to spin lock. 
+	I believe that for sleep and wake, even though the CPU time spent int he high-thread, 
+	the mutex lock would not waste the CPU and not affect CPU time because (sleep and wake) are not costly. 
+	Rather the list operation would be more influencial of the CPU time. 
+
+QUESTION 2.3.2 - Execution Profiling:
+Where (what lines of code) are consuming most of the CPU time when the spin-lock version of the list exerciser is run with a large number of threads?
+Why does this operation become so expensive with large numbers of threads?
+
+	> In line 100, "while (__sync_lock_test_and_set(spinLock, 1) == 1);" would consume
+	most of the CPU time in spin lock. As I mentioned before, in large number of threads, the spin lock takes time a lot
+	because it would keep running the while loop until satisfying the condition in while loop.
+	If the threads are a lot, nobody know how long it would be done.
+	So spin lock is very simple and easy to understand but it not beneficial when there are many number of threads. 
+	> If the number of threads increases, the time would take more because there are more threads to consider for the next
+	and it is directly related to the time consuming to wait. 
+
+QUESTION 2.3.3 - Mutex Wait Time:
+Look at the average time per operation (vs. # threads) and the average wait-for-mutex time (vs. #threads).
+Why does the average lock-wait time rise so dramatically with the number of contending threads?
+Why does the completion time per operation rise (less dramatically) with the number of contending threads?
+How is it possible for the wait time per operation to go up faster (or higher) than the completion time per operation?
+
+	> The average time of operation and wait is increasing when increasing the threads.
+	and also, the completion time is increasing but its increment is less dramatic than the previous one.
+	which means that wait time increasing more abruptly.
+	This is because the context switching of threads let the data be replaced and it would be the reason to increase 
+	the time. However, the increasing rate is less than spining because waiting per operation is much faster. This is because
+	Because of high contention of threads, the lock of the list would make the other thread wait and which is longer than the time
+	to complete the operation. 
+
+QUESTION 2.3.4 - Performance of Partitioned Lists
+Explain the change in performance of the synchronized methods as a function of the number of lists.
+Should the throughput continue increasing as the number of lists is further increased? If not, explain why not.
+It seems reasonable to suggest the throughput of an N-way partitioned list should be equivalent to the throughput of
+a single list with fewer (1/N) threads. Does this appear to be true in the above curves? If not, explain why not.
+
+	> When there are numerous sub lists, it would be easier to get synchronization. In case of multiple threads, the each of tasks
+	can be separated (modularity) and it would be used simultaneously with multiple threads.
+
+	> When the number of lists is increasing, there will be a pointer which means that any contention of data is not available. 
+	This is usually happened when 
+	each of sublist gets processed by single thread. Since the number of lock operations is increasing with the performance; 
+	this would not allow to add more list and rather it would make creasing the throughput.
+
+	> No. This is because partitioning tends to decrease the contention. 
+	As the mentioned graphs, throughput of N-way partitioned lists is same with a sublist with 1/N threads.
+	This is because, because of ratio between sublists and threads, there will be equivalent throughput from a same amoun of contention.
+
+
+FILE DESCRIPTIONS:
+	lab2b_*.png     : by using lab2_list.gp, five graphs will be generated.
+	lab2b_list.csv  : by making file, the each of result(output) will be saved. 
+	lab2_list.gp    : for ploting graph based on the data(csv).
+	profile.out   	: generated profile from makefile 
+	lab2_list.c     
+	SortedList.c    : list (linklist functions)
+	SortedList.h 
+	Makefile       
+	README 
+
+REFERENCES:
+https://computing.llnl.gov/tutorials/pthreads/
+http://man7.org/linux/man-pages/man2/clock_gettime.2.html
+https://attractivechaos.wordpress.com/2011/10/06/multi-threaded-programming-efficiency-of-locking/
+http://man7.org/linux/man-pages/man3/pthread_create.3.html
+https://sourceware.org/binutils/docs/gprof/
+https://people.duke.edu/~hpgavin/gnuplot.html
+

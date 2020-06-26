@@ -1,0 +1,57 @@
+NAME: Gawun Kim
+EMAIL: gawun92@g.ucla.edu
+ID: 305186572
+
+1. Description
+
+The program is to make another terminal into terminal with struct termios.
+To run the program, the shape should be the following format.
+     Format 1 : ./lab1a
+     	- it is for opening terminal. It requires continuous shell cmd.
+     	  ctrl-D makes ending the program successfully. 
+     	  ctrl-C makes killing the process.
+     	  enter  makes inserting the input(cmd) 
+     	  		and showing the output in the new line.
+
+     Format 2 : ./lab1a --shell="shell command"
+     		it is just simplay running the shell command 
+     		and show that following output.
+
+There are two pipes
+
+stdin :  ex)  "ls"
+stdout : ex)  "lab1a.c   lab1a   README  Makefile "
+
+
+          stdout <--             ---->  stdin
+                   |             |
+                   |             |
+                   |             |
+                   |             |
+                   -------  Parent <----------
+                              |              |
+                              |              | result
+                         out  |              |
+                              |              |
+	------------------        |     ------------------
+    |       |        | <------|     |       |        |
+    |   in 	|   out  |              |  in   |   out  | <----
+    |       |	     |              |       |	     |     |
+    ------------------              ------------------     |
+        |                                                  |
+        |                                                  |     (result)
+        | in  ("ls")                                       | out ("list of files")
+        |                                                  |
+        ------------->  Child (result of bash)--------------
+                   
+					    
+					    
+					    
+					    
+2. Reference
+	1.  https://stackoverflow.com/questions/27541910/how-to-use-execvp
+	2.  https://stackoverflow.com/questions/21558937/i-do-not-understand-how-execlp-works-in-linux
+	3.  http://www.unixguide.net/unix/programming/2.1.2.shtml
+	4.  https://stackoverflow.com/questions/20465039/what-does-wexitstatusstatus-return
+	5.  http://man7.org/linux/man-pages/man2/signal.2.html
+	6.  http://man7.org/linux/man-pages/man2/kill.2.html

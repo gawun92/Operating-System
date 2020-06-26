@@ -1,0 +1,33 @@
+NAME: Gawun Kim
+EMAIL: gawun92@g.ucla.edu
+ID: 305186572
+
+
+
+
+
+Description
+This program is about encrypted network communication
+There are two sections 
+  1. connecting between client and server with matched portnumber
+     Similar to the lab1a but only difference is the way of communication.
+     by adding the command --log=filename,
+     user can save all recognized data into the communication after connecting.
+  2. It is ecrypt. The stpes of Encrypt are divided as the following
+     (creating)  - (module open) - (initializing) - (deinitialize and closing)
+     in the spec, it is recommended to use "cfb". However, when I tried it for testing before.
+     It did not work so I ended up using "ofb" and "blowfish" algorithm.
+
+
+
+reference
+
+https://linux.die.net/man/3/mcrypt
+https://www.php.net/manual/en/function.mcrypt-module-open.php
+http://man7.org/linux/man-pages/man3/isatty.3.html
+help with pipes http://man7.org/linux/man-pages/man2/pipe.2.html
+http://www.csl.mtu.edu/cs4411.ck/www/NOTES/process/fork/exec.html
+http://pubs.opengroup.org/onlinepubs/009695399/functions/poll.html
+http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/server.c
+https://www.php.net/manual/en/function.mcrypt-module-open.php
+by TA(Diyu) slides

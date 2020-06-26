@@ -1,0 +1,18 @@
+NAME: Gawun Kim
+EMAIL: gawun92@g.ucla.com
+ID: 305186572
+
+Makefile:
+    To make easy to compile/compress/clean the files
+lab4c_tls.c:
+lab4c_tcp.c:
+    Source code
+README: Description of files in the tar
+
+reference : 
+ - Diyu Slide
+ - Alex Slide
+ - http://openssl.cs.utah.edu/docs/ssl/ssl.html
+ - https://linux.die.net/man/1/openssl
+ - https://www.openssl.org/docs/manpages.html
+ 

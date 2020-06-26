@@ -1,0 +1,72 @@
+NAME: GawunKim
+EMAIL: gawun92@ucla.edu
+ID: 305186572
+
+
+There are 5 of files in "lab0-305186572.tar.gz" zip file
+	1, lab0.c
+	2, Makefile
+	3, README
+	4, backtrace.png
+	5, breakpoint.png
+
+
+1. lab0.c
+   This is written by C. 
+   This program would be able to receive some of arguments and do process with that. 
+   Specifically, only four of arguments are implements to be used: 
+   include, output, segfault, and catch. 
+   Only "input" and "output" need additional argument( =[.txt] ). 
+   Mainly getopt(option), open/close, read/write, and exit are mainly dealt with.
+   When reading and write the buffer, the size of buffer was limited by 1024 
+   and this value was set by me (randomly set it)
+
+
+2. Makefile
+   This is Makefile written by bash.
+   To compile the file, there are two ways: typing "make all" or just "make"
+   This is because compiling was set as default and in "all"
+   There is check whether the code can catch valid argument or not.
+   In my check, I used the following code(below)
+
+   ./lab0 --input=zzzzzzzzzzzzzzzzzzzzzzzzzz.txt ;\
+   if [ $$? -eq 2 ] ; \
+   then\
+      ./lab0 --output= ;\
+      if [ $$? -eq 3 ] ;\
+      then\
+         ./lab0 --asdf ;\
+         if [ $$? -eq 1 ] ;\
+         then\
+            echo "----------------------------------------------TEST CASE PASSED" ;\
+         fi ;\
+      fi ;\
+   fi;\
+
+   This case is checking out the exit (return code)
+
+3. README
+   It is the direction about the lab0. 
+   Gloablly explaining how it works and what this lab is doing for.
+
+4. backtrace.png
+   It is a screenshot. During GDB(debugging process), 
+   I ran the code to get segfault and set the backtrace.
+   
+5. breakpoint.png
+   It is a screenshot. During GDB(debugging process),
+   I set the break point that would cause "segfault" and it was line 16 in my code.
+   After that, I ran the code and kept tracking each line that resulted in
+   segfault.
+   Also, I checked the value of variable(causing segfault). It is null and its value was printed 
+   as 0x0 which is null.
+
+
+reference :
+   https://pubs.opengroup.org/onlinepubs/007904875/functions/read.html
+   https://linux.die.net/man/2/write
+   https://stackoverflow.com/questions/16315089/how-to-get-exit-status-of-a-shell-command-used-in-gnu-makefile	
+   https://www.geeksforgeeks.org/dup-dup2-linux-system-call/
+   http://man7.org/linux/man-pages/man2/dup.2.html
+   https://www.tutorialspoint.com/c_standard_library/c_function_signal.htm
+   https://linux.die.net/man/3/getopt_long

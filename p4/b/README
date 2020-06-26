@@ -1,0 +1,20 @@
+NAME: Gawun Kim
+EMAIL: gawun92@g.ucla.edu
+ID: 305186572
+   
+Makefile:
+	Makefile - compile / checking by smoke test cases / dist / clean
+lab4b.c: Source code. 
+	It is the code for beaglebone with temperature sensor and button. By poll, checking out current status and do process.
+README: 
+	Description of each files
+test.sh: test cases for smoke tests.
+	It is used in Makefile for check
+
+reference:
+https://www.tutorialspoint.com/c_standard_library/c_function_localtime.htm
+https://www.tutorialspoint.com/c_standard_library/c_function_time.htm
+https://www.tutorialspoint.com/c_standard_library/c_function_fprintf.htm
+http://www.cplusplus.com/reference/cstdio/fopen/
+
+

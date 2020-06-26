@@ -1,0 +1,13 @@
+NAME: Gawun Kim
+EMAIL: gawun92@g.ucla.edu
+ID: 305186572
+
+lab3b : source file.
+Makefile : compile, remove, dist the required files.
+README : Description of each files & reference.
+
+
+reference :
+https://stackoverflow.com/questions/42846956/how-to-avoid-overwrite-for-dictionary-append
+https://docs.python.org/2/library/collections.html
+https://thispointer.com/python-how-to-add-append-key-value-pairs-in-dictionary-using-dict-update/

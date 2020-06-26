@@ -1,0 +1,121 @@
+NAME: Gawun Kim
+EMAIL: gawun@g.ucla.edu
+ID: 305186572
+
+
+
+
+-------------------------------------------------------------------------------------------------------
+
+lab2a_add.c: Source code 
+lab2a_list.c: Source code required SortedList.h
+SortedList.h: interface (provided)
+SortedList.c: implementation of SortedList.h
+Makefile: 
+README: 
+lab2a_add.gp  /  lab2a_list.gp : with the generated csv files. Ploting the graph
+
+lab2a_add.csv  / lab2a_list.csv : put data into the file (output)
+
+*.png: after run the two (lab2a_add.gp and lab2a_list.gp), generated graphs
+
+
+
+-------------------------------------------------------------------------------------------------------
+
+
+REFERENCES:
+https://linux.die.net/man/2/sched_yield
+https://computing.llnl.gov/tutorials/pthreads/
+http://man7.org/linux/man-pages/man3/pthread_create.3.html
+http://man7.org/linux/man-pages/man2/clock_gettime.2.html
+https://gcc.gnu.org/onlinedocs/gcc-4.4.3/gcc/Atomic-Builtins.html
+https://attractivechaos.wordpress.com/2011/10/06/multi-threaded-programming-efficiency-of-locking/
+https://gcc.gnu.org/onlinedocs/gcc-4.1.2/gcc/Atomic-Builtins.html
+
+-------------------------------------------------------------------------------------------------------
+
+
+QUESTION 2.1.1 - causing conflicts:
+Why does it take many iterations before errors are seen?
+	-> The many iterations means increasing the possibility of race condition occuring.
+	and large value of iteration and threads means increasing the possibility of errors.
+	The many iterations would be more likely to show various different output cases 
+	compared to less iteration.
+Why does a significantly smaller number of iterations so seldom fail?
+	-> The smaller number of iteration would decrease the possibility to be failed of output. 
+	This is because less iterations would be less likely to colide each processes.
+	and it means the process would be rarely failed.
+
+
+QUESTION 2.1.2 - cost of yielding:
+Why are the --yield runs so much slower?
+	-> The reason of being slower is that yield option require threads to yield to the CPU for other threads; 
+	more context switch unecessarily.(inefficient)
+Where is the additional time going?
+	-> The additional time is going in context switch. 
+	saving thread's state, loading new data from new thread, and update priority of threads.
+Is it possible to get valid per-operation timings if we are using the --yield option?
+If so, explain how. If not, explain why not.
+	-> No. it is impossible to get valid per-operation timing. The reason is the overhead of the yield related functions. 
+	The time would take longer than ideal time because switch context is not always constant and 
+	the manually designed yield would not serve its original functionalities.
+
+
+QUESTION 2.1.3 - measurement errors:
+Why does the average cost per operation drop with increasing iterations?
+	-> The constant size of overhead; and if the number of interation is increasing, 
+	overhead is splitting over the amount of iteration. 
+	In other words, the average cost per operation is getting lower by splited overhead.
+
+If the cost per iteration is a function of the number of iterations, 
+how do we know how many iterations to run (or what the "correct" cost is)?
+	-> Ideally, the correct cost would be gained when iterating infinitely. However, it is actually impossible.
+	For this reason, the iteration should be close to infinite(hopefully) 
+	but countable number which is finite but a lot.
+	and I believe that its amount should not be really huge to delay the speed of process complete.
+
+
+QUESTION 2.1.4 - costs of serialization:
+Why do all of the options perform similarly for low numbers of threads?
+	-> there are threads and  but less critical section accessing relatively.
+	 The less critical sections access means less locks in critical section.
+	 The low numbers of threads does not affect significantly to degrade the speed of execution
+	 For this reason, the option process is performing like bottleneck and with the small amount of
+	 thread does not worsen the traffic(?) of bottleneck.
+	 It results in all of the options perform similarly for lower numbers of threads.
+
+Why do the three protected operations slow down as the number of threads rises?
+	-> As the number of threads rises, the number of accessing threads is increasing as well.
+	and to work one by one. Each of threads should wait for other's processing in the critical section.
+
+
+QUESTION 2.2.1 - scalability of Mutex
+Compare the variation in time per mutex-protected operation vs the number of threads in Part-1 (adds) and Part-2 (sorted lists).	
+Comment on the general shapes of the curves, and explain why they have this shape.
+Comment on the relative rates of increase and differences in the shapes of the curves, and offer an explanation for these differences.
+	-> When the number of threads is increasing the time per mutex is also increasing in the both.
+	The shape of the both graphs is like not really straight linear but possible considered as linear.
+	This is because the number of increased threads would result in more collision in the mutex operations.
+	Generally, the part1 graph is located in high location compared to part2 graph.
+	The reason would be adding would make more collision in the mutex and more time spent(costly). 
+
+
+QUESTION 2.2.2 - scalability of spin locks
+Compare the variation in time per protected operation vs the number of threads for list operations protected by Mutex 
+vs Spin locks. Comment on the general shapes of the curves, and explain why they have this shape.
+Comment on the relative rates of increase and differences in the shapes of the curves, and offer an explanation for 
+these differences.
+	-> For the list operation, both spin locks and mutex locks are increasing and approximately linear.
+	and the location of spin lock is located higher than mutex locks. Also the spin locks' slope is begger than mutex.
+	Spin lock is more costly rather than Mutex locks as I showed in the graph. 
+	(the increasing rate of spin lock is more than the increasing rate of mutex)
+	Spin lock is wasting a lot of CPU running compared to mutex. 
+	
+	Spin locks make continuously run the while loop until satisfying the condition in while loop.
+		in some worst case, it would be infinitely running and this running while loop(without doing any specific process) 
+		is wasting a lot.
+	Mutex locks make locking with two condition -- sleep and wake so that it is more efficient without wasting
+	process. and costly.
+
+
